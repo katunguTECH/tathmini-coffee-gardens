@@ -2,22 +2,38 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Serve static files from the current directory
+// Serve static files
 app.use(express.static(__dirname));
 
-// Specifically handle root path
+// Health check endpoint (required by Railway)
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
+// Handle all routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Handle all other routes
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0', () => {
-    console.log(`✅ Tathmini Coffee Gardens is LIVE!`);
-    console.log(`📍 Port: ${port}`);
-    console.log(`🌍 Visit: http://localhost:${port}`);
+// Use the PORT from Railway environment
+const PORT = process.env.PORT || 8080;
+
+// Start server and keep it running
+const server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`✅ Tathmini Coffee Gardens app running`);
+    console.log(`📍 Port: ${PORT}`);
+    console.log(`🌍 Ready to accept connections`);
+});
+
+// Handle graceful shutdown
+process.on('SIGTERM', () => {
+    console.log('SIGTERM received, closing server...');
+    server.close(() => {
+        console.log('Server closed');
+        process.exit(0);
+    });
 });
