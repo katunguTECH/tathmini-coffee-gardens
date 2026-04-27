@@ -2,20 +2,23 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Serve static files
+// IMPORTANT: Serve static files from the current directory
 app.use(express.static(__dirname));
+
+// Explicitly handle the root path
+app.get('/', (req, res) => {
+    console.log('Root path accessed');
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Health check endpoint (required by Railway)
 app.get('/health', (req, res) => {
     res.status(200).send('OK');
 });
 
-// Handle all routes
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
+// Handle all other routes - serve index.html
 app.get('*', (req, res) => {
+    console.log(`Serving index.html for: ${req.url}`);
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
@@ -23,17 +26,10 @@ app.get('*', (req, res) => {
 const PORT = process.env.PORT || 8080;
 
 // Start server and keep it running
-const server = app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`✅ Tathmini Coffee Gardens app running`);
     console.log(`📍 Port: ${PORT}`);
     console.log(`🌍 Ready to accept connections`);
-});
-
-// Handle graceful shutdown
-process.on('SIGTERM', () => {
-    console.log('SIGTERM received, closing server...');
-    server.close(() => {
-        console.log('Server closed');
-        process.exit(0);
-    });
+    console.log(`📁 Current directory: ${__dirname}`);
+    console.log(`📄 index.html exists: ${require('fs').existsSync(path.join(__dirname, 'index.html'))}`);
 });
