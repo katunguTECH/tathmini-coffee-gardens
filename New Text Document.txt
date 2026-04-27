@@ -1,0 +1,13 @@
+I need to create an app for coffee farmers and members from Nyanza
+the sacco is called TATHMINI COFFEE GARDENS
+It has to have an asthetic farm app
+the website needs to Work on pc as well as mobile apps
+the members subscription fee is kshs 999 per month
+the benefits will allow them to buy arabica coffee seedlings for coffee farming
+later on they will be able to qualify for loans
+the logo for Tathmini coffee gardens Tathmini-logo.jpg is located here C:\Users\katun\Desktop\Tathmini Coffee Gardens\Photos\Tathmini-logo.jpg
+please incorporate it on top of the website
+i have a set of photos that i need to appear as slide show on the website. they are locate here C:\Users\katun\Desktop\Tathmini Coffee Gardens\Photos
+Photo1,Photo2,Photo3,Photo4,Photo5,Photo6,Photo7,Photo8,Photo9,Photo10,Phot11,Photo12
+I am using visual studio code
+please walk me step by step how to do this

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Tathmini Coffee Gardens - Empowering Coffee Farmers</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/Tathmini-logo.jpg" alt="Tathmini Coffee Gardens Logo" onerror="this.src='https://via.placeholder.com/60x60?text=Tathmini'">
+                <span>TATHMINI COFFEE GARDENS</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#benefits">Benefits</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#join" class="join-btn-nav">Join Sacco</a>
+            </div>
+            <div class="mobile-menu" onclick="toggleMenu()">☰</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Growing Together,<br>Harvesting Success</h1>
+            <p>Join Tathmini Coffee Gardens Sacco and transform your coffee farming journey</p>
+            <button class="cta-button" onclick="showJoinForm()">Subscribe Now - KSh 999/month</button>
+        </div>
+    </section>
+
+    <!-- Slideshow Section -->
+    <section class="slideshow-section">
+        <h2>Our Coffee Gardens Gallery</h2>
+        <div class="slideshow-container">
+            <div class="slide-fade">
+                <img src="images/Photo1.jpg" alt="Coffee Farm" id="slide-img" onerror="this.src='https://via.placeholder.com/800x500?text=Coffee+Image'">
+            </div>
+            <button class="prev" onclick="changeSlide(-1)">❮</button>
+            <button class="next" onclick="changeSlide(1)">❯</button>
+        </div>
+        <div class="dots-container" id="dots-container"></div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
+        <h2>Member Benefits</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🌱</div>
+                <h3>Arabica Seedlings</h3>
+                <p>Get high-quality Arabica coffee seedlings at subsidized prices</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Loan Qualification</h3>
+                <p>After 6 months of consistent subscription, qualify for farm loans</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📚</div>
+                <h3>Training & Support</h3>
+                <p>Free training on modern coffee farming techniques</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🤝</div>
+                <h3>Market Access</h3>
+                <p>Direct access to premium coffee markets</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="join" class="pricing">
+        <h2>Simple, Transparent Pricing</h2>
+        <div class="pricing-card">
+            <h3>Monthly Subscription</h3>
+            <div class="price">KSh 999</div>
+            <p>per month</p>
+            <ul>
+                <li>✓ Access to Arabica seedlings</li>
+                <li>✓ Path to loan qualification</li>
+                <li>✓ Free farming training</li>
+                <li>✓ Expert agronomy support</li>
+                <li>✓ Member meetings & networking</li>
+            </ul>
+            <button class="subscribe-btn" onclick="showJoinForm()">Join Now</button>
+        </div>
+    </section>
+
+    <!-- Registration Form Modal -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Join Tathmini Coffee Gardens</h2>
+            <p>Monthly subscription: <strong>KSh 999</strong></p>
+            <form id="registrationForm">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <input type="text" placeholder="Farm Location (e.g., Kisii, Nyanza)" required>
+                <select required>
+                    <option value="">Number of coffee trees</option>
+                    <option>Less than 100</option>
+                    <option>100-500</option>
+                    <option>500-1000</option>
+                    <option>1000+</option>
+                </select>
+                <button type="submit">Subscribe - KSh 999/month</button>
+            </form>
+            <p class="payment-note">* M-Pesa payment instructions will be sent after registration</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>Tathmini Coffee Gardens</h4>
+                <p>Empowering coffee farmers in Nyanza region</p>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>📞 +254 700 000 000</p>
+                <p>✉️ info@tathminicoffee.co.ke</p>
+            </div>
+            <div>
+                <h4>Location</h4>
+                <p>📍 Kisii, Nyanza Region, Kenya</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Tathmini Coffee Gardens. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
