@@ -1,15 +1,30 @@
 {
   "name": "tathmini-coffee-gardens",
   "version": "1.0.0",
-  "description": "Tathmini Coffee Gardens Sacco App",
+  "description": "Tathmini Coffee Gardens Sacco App - Empowering coffee farmers in Nyanza region with subscriptions, seedlings access, and loan qualifications",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "coffee",
+    "farming",
+    "sacco",
+    "tathmini",
+    "kenya",
+    "nyanza",
+    "arabica",
+    "coffee-farmers"
+  ],
+  "author": "Tathmini Coffee Gardens",
+  "license": "MIT",
   "dependencies": {
-    "express": "^4.22.1"
+    "express": "^4.18.2"
   },
   "engines": {
-    "node": "18.x"
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }

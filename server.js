@@ -2,34 +2,28 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// IMPORTANT: Serve static files from the current directory
+// Serve static files
 app.use(express.static(__dirname));
 
-// Explicitly handle the root path
+// Routes
 app.get('/', (req, res) => {
-    console.log('Root path accessed');
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Health check endpoint (required by Railway)
 app.get('/health', (req, res) => {
     res.status(200).send('OK');
 });
 
-// Handle all other routes - serve index.html
-app.get('*', (req, res) => {
-    console.log(`Serving index.html for: ${req.url}`);
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Use the PORT from Railway environment
+// CRITICAL: Get port from Railway, default to 8080
 const PORT = process.env.PORT || 8080;
 
-// Start server and keep it running
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`✅ Tathmini Coffee Gardens app running`);
-    console.log(`📍 Port: ${PORT}`);
-    console.log(`🌍 Ready to accept connections`);
-    console.log(`📁 Current directory: ${__dirname}`);
-    console.log(`📄 index.html exists: ${require('fs').existsSync(path.join(__dirname, 'index.html'))}`);
+// CRITICAL: Listen on all network interfaces
+const server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`✅ Server running on port ${PORT}`);
+    console.log(`✅ Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`✅ Railway port: ${PORT}`);
 });
+
+// Keep server alive
+server.keepAliveTimeout = 61 * 1000;
+server.headersTimeout = 65 * 1000;
