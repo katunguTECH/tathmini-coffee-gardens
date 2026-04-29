@@ -1,0 +1,20 @@
+Consumer Key: YACo3fplz2v21FvzKXzvq7LDR6kxq4q8R2aaQF5HXIKcKURM
+
+Consumer Secret: qw1IUkQeBwAVD8B32mo2e1O84z8O0VIdGbs4V9rGTUiRqOa6bU72DT9yVs97xZUV
+
+
+
+
+# Daraja API Credentials (Get from your dashboard after creating app)
+CONSUMER_KEY=YACo3fplz2v21FvzKXzvq7LDR6kxq4q8R2aaQF5HXIKcKURM
+CONSUMER_SECRET=qw1IUkQeBwAVD8B32mo2e1O84z8O0VIdGbs4V9rGTUiRqOa6bU72DT9yVs97xZUV
+
+# M-Pesa Business Details
+BUSINESS_SHORT_CODE=174379
+PASSKEY=bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919
+
+# For production (change to https://api.safaricom.co.ke when live)
+DARaja_API_URL=https://sandbox.safaricom.co.ke
+
+# Your callback URL (using Railway URL)
+CALLBACK_URL=https://tathmini-coffee-gardens-production.up.railway.app/api/callback

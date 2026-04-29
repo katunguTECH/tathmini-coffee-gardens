@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Tathmini Coffee Gardens - Empowering Coffee Farmers</title>
+    <title>Tathmini Coffee Gardens - Global Coffee Trading Platform</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -18,6 +18,8 @@
             <div class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#benefits">Benefits</a>
+                <a href="#coffee-shop">Coffee Shop</a>
+                <a href="#trading">Trading</a>
                 <a href="#gallery">Gallery</a>
                 <a href="#join" class="join-btn-nav">Join Sacco</a>
             </div>
@@ -29,13 +31,61 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Growing Together,<br>Harvesting Success</h1>
-            <p>Join Tathmini Coffee Gardens Sacco and transform your coffee farming journey</p>
-            <button class="cta-button" onclick="showJoinForm()">Subscribe Now - KSh 999/month</button>
+            <p>Global Coffee Trading Platform | Farm to Cup Excellence</p>
+            <button class="cta-button" onclick="showJoinForm()">Join Sacco - KSh 999/month</button>
+            <button class="cta-button-secondary" onclick="showCoffeeShop()">Buy Coffee - KSh 2000/kg</button>
+        </div>
+    </section>
+
+    <!-- Coffee Shop Section -->
+    <section id="coffee-shop" class="coffee-shop">
+        <h2>Premium Processed Arabica Coffee</h2>
+        <p class="section-subtitle">Direct from our farms to your cup</p>
+        <div class="coffee-card">
+            <div class="coffee-image">☕</div>
+            <h3>100% Arabica Coffee</h3>
+            <p>Premium processed Arabica beans, roasted to perfection</p>
+            <div class="price">KSh 2,000 <span>/kg</span></div>
+            <div class="quantity-selector">
+                <button onclick="decrementQuantity()">-</button>
+                <input type="number" id="coffeeQuantity" value="1" min="1" max="100">
+                <button onclick="incrementQuantity()">+</button>
+            </div>
+            <button class="buy-btn" onclick="buyCoffee()">Buy Now</button>
+        </div>
+    </section>
+
+    <!-- Trading Section -->
+    <section id="trading" class="trading">
+        <h2>Coffee Trading Platform</h2>
+        <p class="section-subtitle">Trade coffee like a pro</p>
+        <div class="trading-grid">
+            <div class="trading-card">
+                <div class="trading-icon">📊</div>
+                <h3>Live Market Prices</h3>
+                <p>Real-time coffee prices from global markets</p>
+                <div class="price-ticker">
+                    <span>Arabica: $4.85/kg</span>
+                    <span>Robusta: $3.20/kg</span>
+                </div>
+            </div>
+            <div class="trading-card">
+                <div class="trading-icon">🏢</div>
+                <h3>Nairobi Coffee Exchange</h3>
+                <p>Direct access to NCE auctions</p>
+                <button class="coming-soon-btn" onclick="showComingSoon()">Coming Soon</button>
+            </div>
+            <div class="trading-card">
+                <div class="trading-icon">☕</div>
+                <h3>Java Outlets</h3>
+                <p>Open coffee shop outlets nationwide</p>
+                <button class="coming-soon-btn" onclick="showComingSoon()">Coming Soon</button>
+            </div>
         </div>
     </section>
 
     <!-- Slideshow Section -->
-    <section class="slideshow-section">
+    <section id="gallery" class="slideshow-section">
         <h2>Our Coffee Gardens Gallery</h2>
         <div class="slideshow-container">
             <div class="slide-fade">
@@ -68,8 +118,8 @@
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">🤝</div>
-                <h3>Market Access</h3>
-                <p>Direct access to premium coffee markets</p>
+                <h3>Global Market Access</h3>
+                <p>Direct access to premium coffee markets worldwide</p>
             </div>
         </div>
     </section>
@@ -86,7 +136,7 @@
                 <li>✓ Path to loan qualification</li>
                 <li>✓ Free farming training</li>
                 <li>✓ Expert agronomy support</li>
-                <li>✓ Member meetings & networking</li>
+                <li>✓ Global market access</li>
             </ul>
             <button class="subscribe-btn" onclick="showJoinForm()">Join Now</button>
         </div>
@@ -98,12 +148,18 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Join Tathmini Coffee Gardens</h2>
             <p>Monthly subscription: <strong>KSh 999</strong></p>
+            
+            <div id="loadingSpinner" style="display: none; text-align: center; padding: 20px;">
+                <div class="spinner"></div>
+                <p>Processing your request...</p>
+            </div>
+            
             <form id="registrationForm">
-                <input type="text" placeholder="Full Name" required>
-                <input type="email" placeholder="Email Address" required>
-                <input type="tel" placeholder="Phone Number" required>
-                <input type="text" placeholder="Farm Location (e.g., Kisii, Nyanza)" required>
-                <select required>
+                <input type="text" id="fullName" placeholder="Full Name" required>
+                <input type="email" id="email" placeholder="Email Address" required>
+                <input type="tel" id="phone" placeholder="Phone Number (e.g., 0712345678)" required>
+                <input type="text" id="location" placeholder="Location (Country/City)" required>
+                <select id="treesCount" required>
                     <option value="">Number of coffee trees</option>
                     <option>Less than 100</option>
                     <option>100-500</option>
@@ -112,7 +168,61 @@
                 </select>
                 <button type="submit">Subscribe - KSh 999/month</button>
             </form>
-            <p class="payment-note">* M-Pesa payment instructions will be sent after registration</p>
+            <p class="payment-note">* M-Pesa payment instructions will be sent to your phone</p>
+        </div>
+    </div>
+
+    <!-- Coffee Purchase Modal -->
+    <div id="coffeeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCoffeeModal()">&times;</span>
+            <h2>Buy Processed Arabica Coffee</h2>
+            <p>Price: <strong>KSh 2,000 per kg</strong></p>
+            <form id="coffeeForm">
+                <input type="text" id="coffeeName" placeholder="Full Name" required>
+                <input type="tel" id="coffeePhone" placeholder="Phone Number (e.g., 0712345678)" required>
+                <input type="email" id="coffeeEmail" placeholder="Email Address" required>
+                <input type="text" id="deliveryAddress" placeholder="Delivery Address" required>
+                <div class="quantity-display">
+                    <label>Quantity (kg):</label>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="decrementPurchaseQty()">-</button>
+                        <span id="purchaseQuantity">1</span>
+                        <button type="button" onclick="incrementPurchaseQty()">+</button>
+                    </div>
+                </div>
+                <div class="total-amount">
+                    Total: KSh <span id="totalAmount">2000</span>
+                </div>
+                <div class="payment-option">
+                    <p>Pay via M-Pesa Paybill:</p>
+                    <p><strong>Business Number: 5723963</strong></p>
+                    <p>Account Number: Your Phone Number</p>
+                </div>
+                <button type="submit">Place Order - KSh <span id="submitTotal">2000</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Status Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePaymentModal()">&times;</span>
+            <div id="paymentStatusContent">
+                <h2>M-Pesa Payment</h2>
+                <div id="paymentMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coming Soon Modal -->
+    <div id="comingSoonModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeComingSoonModal()">&times;</span>
+            <h2>🚀 Coming Soon!</h2>
+            <p>This feature is currently under development.</p>
+            <p>Stay tuned for updates!</p>
+            <button onclick="closeComingSoonModal()" class="close-btn">Close</button>
         </div>
     </div>
 
@@ -121,16 +231,18 @@
         <div class="footer-content">
             <div>
                 <h4>Tathmini Coffee Gardens</h4>
-                <p>Empowering coffee farmers in Nyanza region</p>
+                <p>Empowering coffee farmers worldwide</p>
             </div>
             <div>
                 <h4>Contact</h4>
-                <p>📞 +254 700 000 000</p>
+                <p>📞 <a href="tel:0722770931">0722 770 931</a></p>
                 <p>✉️ info@tathminicoffee.co.ke</p>
+                <p>💳 Paybill: <strong>5723963</strong></p>
             </div>
             <div>
                 <h4>Location</h4>
-                <p>📍 Kisii, Nyanza Region, Kenya</p>
+                <p>📍 Global Operations</p>
+                <p>🇰🇪 Nairobi Coffee Exchange</p>
             </div>
         </div>
         <div class="footer-bottom">
@@ -138,6 +250,564 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <style>
+        /* Additional Styles */
+        .cta-button-secondary {
+            background: #ffd700;
+            color: #1a472a;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s;
+            margin-left: 1rem;
+        }
+        
+        .cta-button-secondary:hover {
+            transform: scale(1.05);
+        }
+        
+        .coffee-shop, .trading {
+            padding: 4rem 2rem;
+            background: #f9f5e8;
+        }
+        
+        .coffee-shop h2, .trading h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #1a472a;
+            font-size: 2rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .coffee-card {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .coffee-image {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .coffee-card .price {
+            font-size: 2rem;
+            color: #1a472a;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .coffee-card .price span {
+            font-size: 1rem;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .quantity-selector button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: #1a472a;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .quantity-selector input {
+            width: 60px;
+            text-align: center;
+            font-size: 1rem;
+            padding: 0.5rem;
+        }
+        
+        .buy-btn {
+            background: #1a472a;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .trading-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .trading-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .trading-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .price-ticker {
+            background: #e8f5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .price-ticker span {
+            display: block;
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+        
+        .coming-soon-btn {
+            background: #ff9800;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .quantity-display {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .quantity-controls button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: #1a472a;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .quantity-controls span {
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-width: 40px;
+        }
+        
+        .total-amount {
+            background: #e8f5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .payment-option {
+            background: #fff3e0;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .close-btn {
+            background: #1a472a;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .cta-button-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            .hero-content button {
+                display: block;
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1a472a;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        a[href="tel:0722770931"] {
+            color: white;
+            text-decoration: none;
+        }
+        
+        a[href="tel:0722770931"]:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <script>
+        // Slideshow functionality
+        let slideIndex = 1;
+        let slideInterval;
+        let purchaseQuantity = 1;
+        
+        const photoNames = [];
+        for (let i = 1; i <= 12; i++) {
+            photoNames.push(`Photo${i}.jpg`);
+        }
+        
+        function showSlides(n) {
+            let imgElement = document.getElementById("slide-img");
+            if (imgElement) {
+                if (n > photoNames.length) slideIndex = 1;
+                if (n < 1) slideIndex = photoNames.length;
+                imgElement.src = `images/${photoNames[slideIndex - 1]}`;
+                imgElement.alt = `Coffee Farm Image ${slideIndex}`;
+            }
+        }
+        
+        function changeSlide(n) {
+            clearInterval(slideInterval);
+            showSlides(slideIndex += n);
+            startAutoSlide();
+        }
+        
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                showSlides(slideIndex += 1);
+            }, 4000);
+        }
+        
+        function createDots() {
+            const dotsContainer = document.getElementById("dots-container");
+            if (dotsContainer && dotsContainer.children.length === 0) {
+                for (let i = 1; i <= photoNames.length; i++) {
+                    const dot = document.createElement("span");
+                    dot.className = "dot";
+                    dot.onclick = (function(index) {
+                        return function() { 
+                            clearInterval(slideInterval);
+                            showSlides(slideIndex = index);
+                            startAutoSlide();
+                        };
+                    })(i);
+                    dotsContainer.appendChild(dot);
+                }
+            }
+        }
+        
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                navLinks.classList.toggle('active');
+            }
+        }
+        
+        // Coffee Shop Functions
+        function showCoffeeShop() {
+            const modal = document.getElementById('coffeeModal');
+            if (modal) {
+                purchaseQuantity = 1;
+                document.getElementById('purchaseQuantity').innerText = purchaseQuantity;
+                updateTotalAmount();
+                modal.style.display = 'block';
+            }
+        }
+        
+        function closeCoffeeModal() {
+            const modal = document.getElementById('coffeeModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        function decrementPurchaseQty() {
+            if (purchaseQuantity > 1) {
+                purchaseQuantity--;
+                document.getElementById('purchaseQuantity').innerText = purchaseQuantity;
+                updateTotalAmount();
+            }
+        }
+        
+        function incrementPurchaseQty() {
+            if (purchaseQuantity < 100) {
+                purchaseQuantity++;
+                document.getElementById('purchaseQuantity').innerText = purchaseQuantity;
+                updateTotalAmount();
+            }
+        }
+        
+        function updateTotalAmount() {
+            const total = purchaseQuantity * 2000;
+            document.getElementById('totalAmount').innerText = total;
+            document.getElementById('submitTotal').innerText = total;
+        }
+        
+        function decrementQuantity() {
+            let qtyInput = document.getElementById('coffeeQuantity');
+            let val = parseInt(qtyInput.value);
+            if (val > 1) {
+                qtyInput.value = val - 1;
+            }
+        }
+        
+        function incrementQuantity() {
+            let qtyInput = document.getElementById('coffeeQuantity');
+            let val = parseInt(qtyInput.value);
+            if (val < 100) {
+                qtyInput.value = val + 1;
+            }
+        }
+        
+        function buyCoffee() {
+            const quantity = document.getElementById('coffeeQuantity').value;
+            showCoffeeShop();
+        }
+        
+        // Coming Soon
+        function showComingSoon() {
+            const modal = document.getElementById('comingSoonModal');
+            if (modal) {
+                modal.style.display = 'block';
+            }
+        }
+        
+        function closeComingSoonModal() {
+            const modal = document.getElementById('comingSoonModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Registration Modal
+        function showJoinForm() {
+            const modal = document.getElementById('joinModal');
+            if (modal) {
+                modal.style.display = 'block';
+                const form = document.getElementById('registrationForm');
+                if (form) form.reset();
+            }
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('joinModal');
+            if (modal) {
+                modal.style.display = 'none';
+                const spinner = document.getElementById('loadingSpinner');
+                if (spinner) spinner.style.display = 'none';
+                const form = document.getElementById('registrationForm');
+                if (form) form.style.display = 'block';
+            }
+        }
+        
+        function showPaymentModal(message, isError = false) {
+            const modal = document.getElementById('paymentModal');
+            const messageDiv = document.getElementById('paymentMessage');
+            if (modal && messageDiv) {
+                messageDiv.innerHTML = message;
+                modal.style.display = 'block';
+            }
+        }
+        
+        function closePaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Handle Coffee Purchase Form
+        document.addEventListener('DOMContentLoaded', () => {
+            createDots();
+            showSlides(1);
+            startAutoSlide();
+            setupSmoothScrolling();
+            
+            // Pre-populate phone from URL if needed
+            const urlParams = new URLSearchParams(window.location.search);
+            const phoneParam = urlParams.get('phone');
+            if (phoneParam) {
+                const phoneInput = document.getElementById('phone');
+                if (phoneInput) phoneInput.value = phoneParam;
+            }
+            
+            const registrationForm = document.getElementById('registrationForm');
+            if (registrationForm) {
+                registrationForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const formData = {
+                        name: document.getElementById('fullName').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        location: document.getElementById('location').value,
+                        treesCount: document.getElementById('treesCount').value
+                    };
+                    
+                    const submitBtn = registrationForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Processing...';
+                    submitBtn.disabled = true;
+                    registrationForm.style.display = 'none';
+                    const spinner = document.getElementById('loadingSpinner');
+                    if (spinner) spinner.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        const successMessage = `
+                            <div class="success-message">
+                                <h3>✅ Registration Successful!</h3>
+                                <p>Welcome to Tathmini Coffee Gardens, ${formData.name}!</p>
+                            </div>
+                            <div class="payment-details">
+                                <strong>Pay via M-Pesa:</strong><br>
+                                Paybill: <strong>5723963</strong><br>
+                                Account: ${formData.phone}<br>
+                                Amount: KSh 999
+                            </div>
+                            <div class="info-message">
+                                We'll send a confirmation SMS shortly.
+                            </div>
+                            <button onclick="closePaymentModal(); closeModal();" 
+                                    style="margin-top: 10px; padding: 10px 20px; background: #1a472a; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                Close
+                            </button>
+                        `;
+                        showPaymentModal(successMessage);
+                        registrationForm.style.display = 'block';
+                        if (spinner) spinner.style.display = 'none';
+                        registrationForm.reset();
+                    }, 1500);
+                    
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+            }
+            
+            const coffeeForm = document.getElementById('coffeeForm');
+            if (coffeeForm) {
+                coffeeForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const quantity = purchaseQuantity;
+                    const total = quantity * 2000;
+                    const name = document.getElementById('coffeeName').value;
+                    const phone = document.getElementById('coffeePhone').value;
+                    
+                    const successMessage = `
+                        <div class="success-message">
+                            <h3>✅ Order Placed Successfully!</h3>
+                            <p>Thank you ${name} for your order of ${quantity}kg of premium Arabica coffee.</p>
+                        </div>
+                        <div class="payment-details">
+                            <strong>M-Pesa Payment Instructions:</strong><br>
+                            Paybill Number: <strong>5723963</strong><br>
+                            Account Number: <strong>${phone}</strong><br>
+                            Amount: <strong>KSh ${total}</strong>
+                        </div>
+                        <div class="info-message">
+                            Complete the M-Pesa transaction and we'll deliver within 3-5 business days.<br>
+                            For inquiries, call <strong>0722 770 931</strong>
+                        </div>
+                        <button onclick="closePaymentModal(); closeCoffeeModal();" 
+                                style="margin-top: 10px; padding: 10px 20px; background: #1a472a; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            Close
+                        </button>
+                    `;
+                    showPaymentModal(successMessage);
+                    coffeeForm.reset();
+                    purchaseQuantity = 1;
+                    document.getElementById('purchaseQuantity').innerText = '1';
+                    updateTotalAmount();
+                });
+            }
+        });
+        
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        const navLinks = document.querySelector('.nav-links');
+                        if (navLinks && navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                        }
+                    }
+                });
+            });
+        }
+        
+        window.onclick = function(event) {
+            const joinModal = document.getElementById('joinModal');
+            const coffeeModal = document.getElementById('coffeeModal');
+            const paymentModal = document.getElementById('paymentModal');
+            const comingSoonModal = document.getElementById('comingSoonModal');
+            if (event.target === joinModal) closeModal();
+            if (event.target === coffeeModal) closeCoffeeModal();
+            if (event.target === paymentModal) closePaymentModal();
+            if (event.target === comingSoonModal) closeComingSoonModal();
+        }
+    </script>
 </body>
 </html>
