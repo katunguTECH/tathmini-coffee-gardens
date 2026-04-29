@@ -51,7 +51,7 @@
                 <input type="number" id="coffeeQuantity" value="1" min="1" max="100">
                 <button onclick="incrementQuantity()">+</button>
             </div>
-            <button class="buy-btn" onclick="buyCoffee()">Buy Now</button>
+            <button class="buy-btn" onclick="showCoffeeShop()">Buy Now</button>
         </div>
     </section>
 
@@ -168,7 +168,7 @@
                 </select>
                 <button type="submit">Subscribe - KSh 999/month</button>
             </form>
-            <p class="payment-note">* M-Pesa payment instructions will be sent to your phone</p>
+            <p class="payment-note">* You will receive an M-Pesa prompt on your phone to complete payment</p>
         </div>
     </div>
 
@@ -194,11 +194,9 @@
                 <div class="total-amount">
                     Total: KSh <span id="totalAmount">2000</span>
                 </div>
-                <div class="payment-option">
-                    <p>Pay via M-Pesa STK Push - Check your phone!</p>
-                </div>
                 <button type="submit">Place Order - KSh <span id="submitTotal">2000</span></button>
             </form>
+            <p class="payment-note">* You will receive an M-Pesa prompt on your phone to complete payment</p>
         </div>
     </div>
 
@@ -235,7 +233,6 @@
                 <h4>Contact</h4>
                 <p>📞 <a href="tel:0722770931">0722 770 931</a></p>
                 <p>✉️ info@tathminicoffee.co.ke</p>
-                <p>💳 Paybill: <strong>5723963</strong></p>
             </div>
             <div>
                 <h4>Location</h4>
@@ -299,13 +296,6 @@
             font-size: 14px;
         }
         
-        .payment-option {
-            background-color: #fff3e0;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-        }
-        
         .countdown-timer {
             font-weight: bold;
             color: #1a472a;
@@ -321,6 +311,13 @@
             cursor: pointer;
             margin-top: 1rem;
             width: 100%;
+        }
+        
+        .payment-note {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 10px;
         }
     </style>
 
@@ -422,7 +419,7 @@
                 attempts++;
                 const countdownDiv = document.getElementById('paymentCountdown');
                 if (countdownDiv) {
-                    countdownDiv.innerHTML = `⏳ Waiting for payment confirmation... (${Math.floor((maxAttempts - attempts) * 5 / 60)} minutes remaining)`;
+                    countdownDiv.innerHTML = `⏳ Waiting for payment confirmation... (${Math.floor((maxAttempts - attempts) / 12)} minutes remaining)`;
                 }
                 
                 try {
@@ -466,11 +463,6 @@
                                 <p>We haven't received payment confirmation yet.</p>
                                 <p>If you completed the payment, it will be processed shortly.</p>
                                 <p>For assistance, call <strong>0722 770 931</strong></p>
-                            </div>
-                            <div class="payment-option">
-                                <strong>Pay via M-Pesa Paybill:</strong><br>
-                                Business Number: <strong>5723963</strong><br>
-                                Amount: <strong>KSh ${isSubscription ? '999' : '2000'}</strong>
                             </div>
                             <button onclick="closePaymentModal();" 
                                     style="margin-top: 10px; padding: 10px 20px; background: #1a472a; color: white; border: none; border-radius: 5px; cursor: pointer;">
@@ -542,11 +534,6 @@
             if (val < 100) {
                 qtyInput.value = val + 1;
             }
-        }
-        
-        function buyCoffee() {
-            const quantity = document.getElementById('coffeeQuantity').value;
-            showCoffeeShop();
         }
         
         // Coming Soon
@@ -658,17 +645,11 @@
                     <div class="error-message">
                         <h3>❌ STK Push Failed</h3>
                         <p>${error.message || 'Failed to send M-Pesa prompt. Please try again.'}</p>
+                        <p>Make sure you have a Safaricom line and sufficient balance.</p>
                     </div>
-                    <div class="payment-option">
-                        <strong>Alternative Payment:</strong><br>
-                        Pay via M-Pesa Paybill:<br>
-                        Business Number: <strong>5723963</strong><br>
-                        Account Number: <strong>${formData.phone}</strong><br>
-                        Amount: <strong>KSh 999</strong>
-                    </div>
-                    <button onclick="closePaymentModal(); showJoinForm();" 
+                    <button onclick="closePaymentModal();" 
                             style="margin-top: 10px; padding: 10px 20px; background: #1a472a; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                        Try Again
+                        Close
                     </button>
                 `;
                 showPaymentModal(errorMessage);
@@ -730,15 +711,9 @@
                 console.error('Coffee Purchase Error:', error);
                 const errorMessage = `
                     <div class="error-message">
-                        <h3>⚠️ STK Push Temporarily Unavailable</h3>
-                        <p>Please complete payment using the Paybill number below:</p>
-                    </div>
-                    <div class="payment-option">
-                        <strong>M-Pesa Payment:</strong><br>
-                        Paybill Number: <strong>5723963</strong><br>
-                        Account Number: <strong>${formData.phone}</strong><br>
-                        Amount: <strong>KSh ${total}</strong><br><br>
-                        After payment, call <strong>0722 770 931</strong> to confirm your order.
+                        <h3>❌ STK Push Failed</h3>
+                        <p>${error.message || 'Failed to send M-Pesa prompt. Please try again.'}</p>
+                        <p>Make sure you have a Safaricom line and sufficient balance.</p>
                     </div>
                     <button onclick="closePaymentModal();" 
                             style="margin-top: 10px; padding: 10px 20px; background: #1a472a; color: white; border: none; border-radius: 5px; cursor: pointer;">
