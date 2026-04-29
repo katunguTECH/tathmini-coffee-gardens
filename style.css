@@ -116,13 +116,213 @@ nav {
     cursor: pointer;
     font-weight: bold;
     transition: transform 0.3s;
+    margin-right: 1rem;
 }
 
 .cta-button:hover {
     transform: scale(1.05);
 }
 
-/* Slideshow */
+.cta-button-secondary {
+    background: #ffd700;
+    color: #1a472a;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.cta-button-secondary:hover {
+    transform: scale(1.05);
+}
+
+/* Coffee Shop Section */
+.coffee-shop {
+    padding: 4rem 2rem;
+    background: #f9f5e8;
+}
+
+.coffee-shop h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1a472a;
+    font-size: 2rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.coffee-card {
+    max-width: 400px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.coffee-card:hover {
+    transform: translateY(-5px);
+}
+
+.coffee-image {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.coffee-card h3 {
+    color: #1a472a;
+    margin-bottom: 1rem;
+}
+
+.coffee-card .price {
+    font-size: 2rem;
+    color: #1a472a;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.coffee-card .price span {
+    font-size: 1rem;
+}
+
+.quantity-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.quantity-selector button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: #1a472a;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.quantity-selector button:hover {
+    background: #2d5a3f;
+}
+
+.quantity-selector input {
+    width: 60px;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.buy-btn {
+    background: #1a472a;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background 0.3s;
+}
+
+.buy-btn:hover {
+    background: #2d5a3f;
+}
+
+/* Trading Section */
+.trading {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+}
+
+.trading h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1a472a;
+    font-size: 2rem;
+}
+
+.trading-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.trading-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.trading-card:hover {
+    transform: translateY(-5px);
+}
+
+.trading-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.trading-card h3 {
+    color: #1a472a;
+    margin-bottom: 1rem;
+}
+
+.trading-card p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.price-ticker {
+    background: #e8f5e9;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.price-ticker span {
+    display: block;
+    margin: 0.5rem 0;
+    font-weight: bold;
+    color: #1a472a;
+}
+
+.coming-soon-btn {
+    background: #ff9800;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.3s;
+}
+
+.coming-soon-btn:hover {
+    background: #e68900;
+}
+
+/* Slideshow Section */
 .slideshow-section {
     padding: 4rem 2rem;
     background: white;
@@ -299,7 +499,7 @@ nav {
     background: #2d5a3f;
 }
 
-/* Modal */
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -366,6 +566,116 @@ nav {
     text-align: center;
 }
 
+.quantity-display {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.quantity-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.quantity-controls button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: #1a472a;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.quantity-controls span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-width: 40px;
+}
+
+.total-amount {
+    background: #e8f5e9;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.payment-option {
+    background: #fff3e0;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.close-btn {
+    background: #1a472a;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+/* Messages */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    border: 1px solid #c3e6cb;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    border: 1px solid #f5c6cb;
+}
+
+.info-message {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    border: 1px solid #bee5eb;
+}
+
+.payment-details {
+    background-color: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #1a472a;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Footer */
 footer {
     background: #1a1a1a;
@@ -380,6 +690,15 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     margin-bottom: 2rem;
+}
+
+.footer-content a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
 }
 
 .footer-bottom {
@@ -413,6 +732,16 @@ footer {
         font-size: 2rem;
     }
     
+    .hero-content button {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+    
+    .cta-button {
+        margin-right: 0;
+    }
+    
     .prev, .next {
         padding: 0.5rem;
     }
@@ -427,5 +756,14 @@ footer {
     
     .slide-fade img {
         height: 300px;
+    }
+    
+    .coffee-card {
+        margin: 0 1rem;
+    }
+    
+    .trading-grid {
+        gap: 1rem;
+        padding: 0 1rem;
     }
 }
